@@ -104,6 +104,48 @@ function create() {
     )
 }
 
+
+function setEarn() {
+    localStorage.setItem(
+        "balance",
+        parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
+        
+    );
+    localStorage.setItem(
+        "item-list-count",
+        0
+    )
+    
+    let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + "+" + modalinput2.value.toString()
+    let list = []
+    list.push(info)
+    localStorage.setItem(
+        "item-list",JSON.stringify(list)
+        
+    )
+
+}
+
+function createEarn() {
+    localStorage.setItem(
+        "balance",
+        parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
+        
+    );
+    localStorage.setItem(
+        "item-list-count",
+        0
+    )
+    
+    let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + "+" + modalinput2.value.toString()
+    let list = JSON.parse(localStorage.getItem("item-list"))
+    list.push(info)
+    localStorage.setItem(
+        "item-list",JSON.stringify(list)
+        
+    )
+}
+
 function confirm() {
     
     if(document.getElementById("modal-title").innerText == "Spend")
@@ -137,53 +179,33 @@ function confirm() {
         }
         balance.innerText = localStorage.getItem("balance")
     }else{
-        let item = {
-            name:modalinput1.value,
-            date:day + "/" + month,
-            price:modalinput2.value
-        };
 
-        if(localStorage.getItem("item-list-count") == null)
+        if(localStorage.getItem("item-list") != "" || localStorage.getItem("item-list") != null)
         {
-            localStorage.setItem(
-                "balance",
-                parseFloat(localStorage.getItem("balance")) + parseFloat(modalinput2.value)
-                
-            );
-            localStorage.setItem(
-                "item-list-count",
-                0
-            )
+            if(modalinput1.value == null || modalinput2.value == null || modalinput1.value == "" || modalinput2.value == "")
+            {
+                document.getElementById("warn").style = "display:initial; color:red;"
+                console.log("null")
+            }
+            else{
+                console.log("set")
+               setEarn() 
+               hideModal()
+            }
             
-            let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + "+" +modalinput2.value.toString()
-            let list = []
-            list.push(info)
-            localStorage.setItem(
-                "item-list",JSON.stringify(list)
-                
-            )
-            hideModal()
+            
         }else{
-            localStorage.setItem(
-                "balance",
-                parseFloat(localStorage.getItem("balance")) + parseFloat(modalinput2.value)
-                
-            );
-            localStorage.setItem(
-                "item-list-count",
-                0
-            )
-            
-            let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + "+" +modalinput2.value.toString()
-            let list = JSON.parse(localStorage.getItem("item-list"))
-            list.push(info)
-            localStorage.setItem(
-                "item-list",JSON.stringify(list)
-                
-            )
-            hideModal()
+            if(modalinput1.value == null || modalinput2.value == null || modalinput1.value == "" || modalinput2.value == "")
+            {
+                document.getElementById("warn").style = "display:initial; color:red;"
+                console.log("null")
+            }
+            else{
+                console.log("set")
+               createEarn() 
+               hideModal()
+            }
         }
-
         balance.innerText = localStorage.getItem("balance")
     }
 }
