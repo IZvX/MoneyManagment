@@ -358,7 +358,7 @@ textarea:focus, input:focus{
     gap: 15px;
     background-color: white;
     width: 50%;
-    height: 70%;
+    height: 50%;
     border-radius: 24px;
 }
 

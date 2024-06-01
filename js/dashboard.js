@@ -281,3 +281,10 @@ window.onload = function () {
 function clearTransition() {
     transition.style = "display: none;";
 }
+
+document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 117) {
+        localStorage.clear();
+        this.location.reload();
+    }
+});
