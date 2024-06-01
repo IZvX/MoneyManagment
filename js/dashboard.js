@@ -42,6 +42,7 @@ function showModalSpend() {
     modaltitle.innerText = "Spend"
     modal.style.animation="pop1 0.1s linear";
     modalcontainer.style.animation="slide 0.1s linear"
+    document.getElementById("warn").style = "display:none";
 }
 
 function showModalEarn() {
@@ -49,68 +50,91 @@ function showModalEarn() {
     modaltitle.innerText = "Earn"
     modal.style.animation="pop1 0.1s linear";
     modalcontainer.style.animation="slide 0.1s linear"
+    document.getElementById("warn").style = "display:none";
 }
 
 function hideModal() {
     modal.style = "display: none;";
     balance.innerText = localStorage.getItem("balance")
+    document.getElementById("warn").style = "display:none";
+    modalinput1.value = null
+    modalinput2.value = null 
 }
 
 modalconfirm.onclick = confirm
+
+function set() {
+    localStorage.setItem(
+        "balance",
+        parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
+        
+    );
+    localStorage.setItem(
+        "item-list-count",
+        0
+    )
+    
+    let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + -modalinput2.value.toString()
+    let list = []
+    list.push(info)
+    localStorage.setItem(
+        "item-list",JSON.stringify(list)
+        
+    )
+
+}
+
+function create() {
+    localStorage.setItem(
+        "balance",
+        parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
+        
+    );
+    localStorage.setItem(
+        "item-list-count",
+        0
+    )
+    
+    let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + -modalinput2.value.toString()
+    let list = JSON.parse(localStorage.getItem("item-list"))
+    list.push(info)
+    localStorage.setItem(
+        "item-list",JSON.stringify(list)
+        
+    )
+}
 
 function confirm() {
     
     if(document.getElementById("modal-title").innerText == "Spend")
     {
-        let item = {
-            name:modalinput1.value,
-            date:day + "/" + month,
-            price:modalinput2.value
-        };
 
-        if(localStorage.getItem("item-list-count") == null)
+        if(localStorage.getItem("item-list") != "" || localStorage.getItem("item-list") != null)
         {
-            localStorage.setItem(
-                "balance",
-                parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
-                
-            );
-            localStorage.setItem(
-                "item-list-count",
-                0
-            )
+            if(modalinput1.value == null || modalinput2.value == null || modalinput1.value == "" || modalinput2.value == "")
+            {
+                document.getElementById("warn").style = "display:initial; color:red;"
+                console.log("null")
+            }
+            else{
+                console.log("set")
+               set() 
+               hideModal()
+            }
             
-            let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + -modalinput2.value.toString()
-            let list = []
-            list.push(info)
-            localStorage.setItem(
-                "item-list",JSON.stringify(list)
-                
-            )
-            hideModal()
+            
         }else{
-            localStorage.setItem(
-                "balance",
-                parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
-                
-            );
-            localStorage.setItem(
-                "item-list-count",
-                0
-            )
-            
-            let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + -modalinput2.value.toString()
-            let list = JSON.parse(localStorage.getItem("item-list"))
-            list.push(info)
-            localStorage.setItem(
-                "item-list",JSON.stringify(list)
-                
-            )
-            hideModal()
+            if(modalinput1.value == null || modalinput2.value == null || modalinput1.value == "" || modalinput2.value == "")
+            {
+                document.getElementById("warn").style = "display:initial; color:red;"
+                console.log("null")
+            }
+            else{
+                console.log("set")
+               create() 
+               hideModal()
+            }
         }
-
-        modalinput.value = 0
-        hideModal()
         balance.innerText = localStorage.getItem("balance")
     }else{
         let item = {
@@ -160,11 +184,10 @@ function confirm() {
             hideModal()
         }
 
-        modalinput.value = 0
-        hideModal()
         balance.innerText = localStorage.getItem("balance")
     }
 }
+
 
 // MODAL GOAL
 const goalmodal = document.getElementById("goal-modal");
@@ -215,7 +238,8 @@ function goalconfirm() {
         goalmodalinput2.value
         
     );
-    modalinput.value = 0
+    goalmodalinput1.value = null
+    goalmodalinput2.value = null
     hideGoalModal()
     goalname.innerText = localStorage.getItem("goal-name")
     goalprice.innerText = localStorage.getItem("goal-price")
@@ -234,7 +258,7 @@ function calculateGoalProgress() {
     const balancefloat = parseInt(localStorage.getItem("balance"));
     const goalfloat = parseInt(localStorage.getItem("goal-price"));
     const percentage = parseInt((balancefloat/goalfloat)*100);
-    goalprogress.innerText = percentage;
+    goalprogress.innerText = ~~percentage
     progressfill.style = "width:" + clamp(percentage,0,100) + "%;"
 }
 
@@ -260,7 +284,7 @@ window.onload = function () {
     transition.style.animation = "load .5s linear"
     transition.addEventListener('animationend',clearTransition)
 
-    if (localStorage.getItem("balance") == null) {
+    if (localStorage.getItem("balance") == "NaN" || localStorage.getItem("balance") == null) {
         localStorage.setItem("balance",0)
         location.reload()
     }
