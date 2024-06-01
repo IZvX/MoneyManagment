@@ -108,7 +108,7 @@ function create() {
 function setEarn() {
     localStorage.setItem(
         "balance",
-        parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
+        parseFloat(localStorage.getItem("balance")) + parseFloat(modalinput2.value)
         
     );
     localStorage.setItem(
@@ -129,7 +129,7 @@ function setEarn() {
 function createEarn() {
     localStorage.setItem(
         "balance",
-        parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
+        parseFloat(localStorage.getItem("balance")) + parseFloat(modalinput2.value)
         
     );
     localStorage.setItem(
