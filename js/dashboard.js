@@ -64,86 +64,22 @@ function hideModal() {
 modalconfirm.onclick = confirm
 
 function set() {
-    localStorage.setItem(
-        "balance",
-        parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
-        
-    );
-    localStorage.setItem(
-        "item-list-count",
-        0
-    )
-    
-    let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + -modalinput2.value.toString()
-    let list = []
-    list.push(info)
-    localStorage.setItem(
-        "item-list",JSON.stringify(list)
-        
-    )
+
 
 }
 
 function create() {
-    localStorage.setItem(
-        "balance",
-        parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
-        
-    );
-    localStorage.setItem(
-        "item-list-count",
-        0
-    )
-    
-    let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + -modalinput2.value.toString()
-    let list = JSON.parse(localStorage.getItem("item-list"))
-    list.push(info)
-    localStorage.setItem(
-        "item-list",JSON.stringify(list)
-        
-    )
+
 }
 
 
 function setEarn() {
-    localStorage.setItem(
-        "balance",
-        parseFloat(localStorage.getItem("balance")) + parseFloat(modalinput2.value)
-        
-    );
-    localStorage.setItem(
-        "item-list-count",
-        0
-    )
-    
-    let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + "+" + modalinput2.value.toString()
-    let list = []
-    list.push(info)
-    localStorage.setItem(
-        "item-list",JSON.stringify(list)
-        
-    )
+
 
 }
 
 function createEarn() {
-    localStorage.setItem(
-        "balance",
-        parseFloat(localStorage.getItem("balance")) + parseFloat(modalinput2.value)
-        
-    );
-    localStorage.setItem(
-        "item-list-count",
-        0
-    )
-    
-    let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + "+" + modalinput2.value.toString()
-    let list = JSON.parse(localStorage.getItem("item-list"))
-    list.push(info)
-    localStorage.setItem(
-        "item-list",JSON.stringify(list)
-        
-    )
+
 }
 
 function confirm() {
@@ -151,7 +87,7 @@ function confirm() {
     if(document.getElementById("modal-title").innerText == "Spend")
     {
 
-        if(localStorage.getItem("item-list") != "" || localStorage.getItem("item-list") != null)
+        if(localStorage.getItem("item-list") == "" || localStorage.getItem("item-list") == null)
         {
             if(modalinput1.value == null || modalinput2.value == null || modalinput1.value == "" || modalinput2.value == "")
             {
@@ -160,12 +96,39 @@ function confirm() {
             }
             else{
                 console.log("set")
-               set() 
+
+
+
+
+                localStorage.setItem(
+                    "balance",
+                    parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
+                    
+                );
+                localStorage.setItem(
+                    "item-list-count",
+                    localStorage.getItem("item-list-count")
+                )
+                
+                let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + -modalinput2.value.toString()
+                let list = []
+                list.push(info)
+                localStorage.setItem(
+                    "item-list",JSON.stringify(list)
+                    
+                )
+
+
+
+
                hideModal()
             }
             
             
         }else{
+
+
+
             if(modalinput1.value == null || modalinput2.value == null || modalinput1.value == "" || modalinput2.value == "")
             {
                 document.getElementById("warn").style = "display:initial; color:red;"
@@ -173,14 +136,41 @@ function confirm() {
             }
             else{
                 console.log("set")
-               create() 
+
+
+
+                localStorage.setItem(
+                    "balance",
+                    parseFloat(localStorage.getItem("balance")) - parseFloat(modalinput2.value)
+                    
+                );
+                localStorage.setItem(
+                    "item-list-count",
+                    0
+                )
+                
+                let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + -modalinput2.value.toString()
+                let list = JSON.parse(localStorage.getItem("item-list"));
+                list.push(info)
+                localStorage.setItem(
+                    "item-list",JSON.stringify(list)
+                    
+                )
+
+
+
                hideModal()
             }
         }
         balance.innerText = localStorage.getItem("balance")
+
+
+
+
+    //earn
     }else{
 
-        if(localStorage.getItem("item-list") != "" || localStorage.getItem("item-list") != null)
+        if(localStorage.getItem("item-list") == "" || localStorage.getItem("item-list") == null)
         {
             if(modalinput1.value == null || modalinput2.value == null || modalinput1.value == "" || modalinput2.value == "")
             {
@@ -189,12 +179,39 @@ function confirm() {
             }
             else{
                 console.log("set")
-               setEarn() 
+
+
+
+
+                localStorage.setItem(
+                    "balance",
+                    parseFloat(localStorage.getItem("balance")) + parseFloat(modalinput2.value)
+                    
+                );
+                localStorage.setItem(
+                    "item-list-count",
+                    localStorage.getItem("item-list-count")
+                )
+                
+                let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + "+" + modalinput2.value.toString()
+                let list = []
+                list.push(info)
+                localStorage.setItem(
+                    "item-list",JSON.stringify(list)
+                    
+                )
+
+
+
+
                hideModal()
             }
             
             
         }else{
+
+
+
             if(modalinput1.value == null || modalinput2.value == null || modalinput1.value == "" || modalinput2.value == "")
             {
                 document.getElementById("warn").style = "display:initial; color:red;"
@@ -202,7 +219,29 @@ function confirm() {
             }
             else{
                 console.log("set")
-               createEarn() 
+
+
+
+                localStorage.setItem(
+                    "balance",
+                    parseFloat(localStorage.getItem("balance")) + parseFloat(modalinput2.value)
+                    
+                );
+                localStorage.setItem(
+                    "item-list-count",
+                    0
+                )
+                
+                let info = localStorage.getItem("item-list-count") + ":" + modalinput1.value + ":" + day + "/" + month + ":" + "+" + modalinput2.value.toString()
+                let list = JSON.parse(localStorage.getItem("item-list"));
+                list.push(info)
+                localStorage.setItem(
+                    "item-list",JSON.stringify(list)
+                    
+                )
+
+
+
                hideModal()
             }
         }
@@ -308,6 +347,10 @@ window.onload = function () {
 
     if (localStorage.getItem("balance") == "NaN" || localStorage.getItem("balance") == null) {
         localStorage.setItem("balance",0)
+        location.reload()
+    }
+    if (localStorage.getItem("item-list-count") == null) {
+        localStorage.setItem("item-list-count",0)
         location.reload()
     }
     if (localStorage.getItem("item-list") == null) {
