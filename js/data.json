@@ -20,7 +20,7 @@
                 },
                 "Opera": {
                   "Name": "Opera",
-                  "Cmd": "sudo apt install opera-stable",
+                  "Cmd": "wget -qO - https://deb.opera.com/archive.key | sudo apt-key add - && sudo sh -c 'echo "deb [arch=amd64] https://deb.opera.com/stable/ stable non-free" > /etc/apt/sources.list.d/opera.list' && sudo apt update && sudo apt install opera-stable",
                   "Description": "A web browser with built-in ad blocking and VPN features.",
                   "Icon": "resources/opera.png"
                 },
