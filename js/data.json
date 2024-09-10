@@ -103,7 +103,7 @@
                 "Name": "Blender",
                 "Cmd": "sudo apt install blender",
                 "Description": "A free and open-source 3D creation suite.",
-                "Icon": "resources/blender.png"
+                "Icon": "resources/blender.svg"
               },
               "Streamio": {
                 "Name": "Streamio",
