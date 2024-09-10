@@ -94,6 +94,44 @@
               }
             }
           ]
+        },
+        "Multimedia": {
+          "Name": "Multimedia",
+          "Apps": [
+            {
+              "Blender": {
+                "Name": "Blender",
+                "Cmd": "sudo apt install blender",
+                "Description": "A free and open-source 3D creation suite.",
+                "Icon": "resources/blender.png"
+              },
+              "Streamio": {
+                "Name": "Streamio",
+                "Cmd": "sudo apt install streamio",
+                "Description": "A media center for watching movies and TV shows.",
+                "Icon": "resources/streamio.png"
+              },
+              "Steam": {
+                "Name": "Steam",
+                "Cmd": "sudo apt install steam",
+                "Description": "A digital distribution platform for video games.",
+                "Icon": "resources/steam.png"
+              }
+            }
+          ]
+        },
+        "Communication": {
+          "Name": "Communication",
+          "Apps": [
+            {
+              "Discord": {
+                "Name": "Discord",
+                "Cmd": "sudo apt install discord",
+                "Description": "A communication app for gamers with voice, video, and text chat.",
+                "Icon": "resources/discord.png"
+              }
+            }
+          ]
         }
       }
     ]
